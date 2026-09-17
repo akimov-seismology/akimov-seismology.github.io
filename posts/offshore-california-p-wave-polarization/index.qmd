@@ -1,3 +1,17 @@
+---
+title: "P-Wave Polarization for Offshore California Earthquakes"
+subtitle: "Fixed and moving-window tests at BK Network stations"
+author: "Andrei Akimov"
+date: "2026-09-17"
+categories:
+  - Seismology
+  - P-wave polarization
+  - Earthquake location
+description: "A station-level study of P-wave polarization and back-azimuth accuracy for offshore California earthquakes."
+image: media/image1.png
+toc: true
+---
+
 **Andrei Akimov**
 
 *Seismology Skill Building Workshop 2026*
