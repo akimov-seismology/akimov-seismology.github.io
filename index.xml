@@ -32,7 +32,8 @@
   <pubDate>Thu, 17 Sep 2026 07:00:00 GMT</pubDate>
 </item>
 <item>
-  <title></title>
+  <title>P-Wave Polarization for Offshore California Earthquakes</title>
+  <dc:creator>Andrei Akimov</dc:creator>
   <link>https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/</link>
   <description><![CDATA[ 
 
@@ -469,8 +470,12 @@
 </section>
 
  ]]></description>
+  <category>Seismology</category>
+  <category>P-wave polarization</category>
+  <category>Earthquake location</category>
   <guid>https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/</guid>
-  <pubDate>Thu, 17 Sep 2026 21:52:38 GMT</pubDate>
+  <pubDate>Thu, 17 Sep 2026 07:00:00 GMT</pubDate>
+  <media:content url="https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/media/image1.png" medium="image" type="image/png" height="205" width="144"/>
 </item>
 </channel>
 </rss>

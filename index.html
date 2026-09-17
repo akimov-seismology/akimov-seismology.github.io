@@ -85,9 +85,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -181,8 +181,17 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UmVzZWFyY2glMjBOb3Rlcw==">Research Notes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2Vpc21vbG9neQ==">Seismology <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#research-articles" id="toc-research-articles" class="nav-link active" data-scroll-target="#research-articles">Research articles</a>
+  <ul class="collapse">
+  <li><a href="#offshore-california-p-wave-polarization" id="toc-offshore-california-p-wave-polarization" class="nav-link" data-scroll-target="#offshore-california-p-wave-polarization">Offshore California P-Wave Polarization</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RWFydGhxdWFrZSUyMGxvY2F0aW9u">Earthquake location <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UC13YXZlJTIwcG9sYXJpemF0aW9u">P-wave polarization <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmVzZWFyY2glMjBOb3Rlcw==">Research Notes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2Vpc21vbG9neQ==">Seismology <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
 
@@ -207,32 +216,20 @@ window.Quarto = {
 
 <p>I am an independent researcher working in earthquake seismology.</p>
 <p>This website contains research notes, computational experiments, figures, and notebooks related to earthquake location, seismic phase association, waveform analysis, polarization, virtual arrays, and Earth structure.</p>
+<section id="research-articles" class="level2">
+<h2 class="anchored" data-anchor-id="research-articles">Research articles</h2>
+<section id="offshore-california-p-wave-polarization" class="level3">
+<h3 class="anchored" data-anchor-id="offshore-california-p-wave-polarization"><a href="posts/offshore-california-p-wave-polarization/">Offshore California P-Wave Polarization</a></h3>
+<p>A station-level study of P-wave polarization and back-azimuth accuracy for offshore California earthquakes.</p>
 
 
 
+</section>
+</section>
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1789681531853" data-listing-reading-time-sort="20" data-listing-word-count-sort="3928">
-<div class="thumbnail"><a href="./posts/offshore-california-p-wave-polarization/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="posts/offshore-california-p-wave-polarization/media/image1.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/offshore-california-p-wave-polarization/index.html" class="no-external">Results at a glance</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/offshore-california-p-wave-polarization/index.html" class="no-external">
-<strong>Andrei Akimov</strong>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/offshore-california-p-wave-polarization/index.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="U2Vpc21vbG9neSUyQ1Jlc2VhcmNoJTIwTm90ZXM=" data-listing-date-sort="1789628400000" data-listing-file-modified-sort="1789675490145" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="27">
+<div class="quarto-post image-right" data-index="0" data-categories="U2Vpc21vbG9neSUyQ1Jlc2VhcmNoJTIwTm90ZXM=" data-listing-date-sort="1789628400000" data-listing-file-modified-sort="1789675490145" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="27">
 <div class="thumbnail"><a href="./posts/welcome/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -242,6 +239,9 @@ window.Quarto = {
 <h3 class="no-anchor listing-title">
 <a href="./posts/welcome/index.html" class="no-external">Welcome to My Research Notes</a>
 </h3>
+<div class="listing-subtitle">
+<a href="./posts/welcome/index.html" class="no-external"></a>
+</div>
 <div class="listing-categories">
 
 <div class="listing-category" onclick="window.quartoListingCategory('U2Vpc21vbG9neQ=='); return false;">Seismology</div>
@@ -255,6 +255,43 @@ window.Quarto = {
 </div>
 <div class="metadata">
 <a href="./posts/welcome/index.html" class="no-external">
+<div class="listing-date">
+Sep 17, 2026
+</div>
+<div class="listing-author">
+Andrei Akimov
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="U2Vpc21vbG9neSUyQ1Atd2F2ZSUyMHBvbGFyaXphdGlvbiUyQ0VhcnRocXVha2UlMjBsb2NhdGlvbg==" data-listing-date-sort="1789628400000" data-listing-file-modified-sort="1789683127299" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3928">
+<div class="thumbnail"><a href="./posts/offshore-california-p-wave-polarization/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/offshore-california-p-wave-polarization/media/image1.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/offshore-california-p-wave-polarization/index.html" class="no-external">P-Wave Polarization for Offshore California Earthquakes</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/offshore-california-p-wave-polarization/index.html" class="no-external">Fixed and moving-window tests at BK Network stations</a>
+</div>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2Vpc21vbG9neQ=='); return false;">Seismology</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('UC13YXZlJTIwcG9sYXJpemF0aW9u'); return false;">P-wave polarization</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RWFydGhxdWFrZSUyMGxvY2F0aW9u'); return false;">Earthquake location</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/offshore-california-p-wave-polarization/index.html" class="no-external">
+<p>A station-level study of P-wave polarization and back-azimuth accuracy for offshore California earthquakes.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/offshore-california-p-wave-polarization/index.html" class="no-external">
 <div class="listing-date">
 Sep 17, 2026
 </div>
