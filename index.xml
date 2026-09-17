@@ -31,5 +31,446 @@
   <guid>https://akimov-seismology.github.io/posts/welcome/</guid>
   <pubDate>Thu, 17 Sep 2026 07:00:00 GMT</pubDate>
 </item>
+<item>
+  <title></title>
+  <link>https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><strong>Andrei Akimov</strong></p>
+<p><em>Seismology Skill Building Workshop 2026</em></p>
+<p>For my final project at the 2026 Seismology Skill Building Workshop, I tested whether the first P wave recorded at a three-component seismic station can point back toward an offshore California earthquake. The main result is that selecting a short window near the predicted P arrival works much better than using one fixed window, although performance still varies strongly among stations.</p>
+<p>Offshore earthquakes are a useful test because most recording stations are located on only one side of the event. A polarization estimate could add a directional constraint when only a few stations have reported, but it must be treated as station dependent rather than uniformly reliable.</p>
+<section id="results-at-a-glance" class="level1">
+<h1>Results at a glance</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 55%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Measure</strong></th>
+<th style="text-align: center;"><strong>Result</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Analyzed station-event observations</td>
+<td style="text-align: center;">825</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Good sliding-window observations</td>
+<td style="text-align: center;">742 (89.9%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Good observations with error below 10 degrees</td>
+<td style="text-align: center;">317 (38.4% of all observations)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fixed-window Good observations</td>
+<td style="text-align: center;">48.6%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fixed-window Good and below 10 degrees</td>
+<td style="text-align: center;">13.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Median selected-window start offset</td>
+<td style="text-align: center;">-1.05 s relative to predicted P</td>
+</tr>
+</tbody>
+</table>
+<p>This is an exploratory, reproducible research result and has not been peer reviewed.</p>
+</section>
+<section id="research-question-and-study-design" class="level1">
+<h1>Research question and study design</h1>
+<p>The central question is whether the first P-wave motion recorded at a BK station can point back toward an offshore earthquake. A second question is whether searching several one-second windows near the predicted arrival improves the estimate relative to a fixed P-to-P-plus-one-second window.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 38%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Item</strong></th>
+<th style="text-align: left;"><strong>Choice</strong></th>
+<th style="text-align: left;"><strong>Reason</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Area</td>
+<td style="text-align: left;">California and nearby offshore region</td>
+<td style="text-align: left;">Uneven station coverage makes offshore events a practical directional test.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Time</td>
+<td style="text-align: left;">2020 through the notebook run date</td>
+<td style="text-align: left;">Provides a useful set of recent events.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Events</td>
+<td style="text-align: left;">Offshore earthquakes, magnitude 4.0 or larger</td>
+<td style="text-align: left;">Larger events are more likely to produce a clear P wave.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Stations</td>
+<td style="text-align: left;">10 previously successful and 10 poor BK stations, within 250 km</td>
+<td style="text-align: left;">Keeps the run manageable while retaining both strong and weak stations.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Channels</td>
+<td style="text-align: left;">Complete Z, N, and E at 100 or 200 samples per second</td>
+<td style="text-align: left;">Three components are required to estimate particle motion.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Catalog</td>
+<td style="text-align: left;">NCEDC</td>
+<td style="text-align: left;">Provides origins, magnitudes, and station metadata.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Waveforms</td>
+<td style="text-align: left;">EarthScope first, then NCEDC</td>
+<td style="text-align: left;">Two services improve data availability.</td>
+</tr>
+</tbody>
+</table>
+<p>The station groups were fixed before the current run. The successful group was ranked using earlier observations that were both Good and within 10 degrees of the catalog direction. Each poor station had at least 25 earlier analyzed observations and a low strict-success percentage. This design deliberately tests both favorable and unfavorable stations, but it is not a random sample of the entire BK network.</p>
+</section>
+<section id="geographic-coverage" class="level1">
+<h1>Geographic coverage</h1>
+<p>The retained earthquakes are concentrated offshore of northern California, while nearly all stations are on land to the east. The map makes the one-sided geometry, long paths, and coverage gaps visible; these features should be considered when interpreting the residual statistics.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/media/image1.png" style="width:4.35in;height:6.17816in" class="figure-img"></p>
+<figcaption><em>Figure 1. Offshore earthquakes with downloaded data and the 20 BK stations used in the analysis. The map shows 82 retained offshore events and the uneven station geometry.</em></figcaption>
+</figure>
+</div>
+</section>
+<section id="processing-and-polarization-measurement" class="level1">
+<h1>Processing and polarization measurement</h1>
+<p>The notebook requests event origins and magnitudes from NCEDC, retains offshore epicenters, and pairs each event with selected stations within 250 km. It does not use catalog P picks. Instead, it predicts P travel times using the SCSN Hadley-Kanamori one-dimensional model below 152.78 km and ak135 at larger distances, assuming an 8 km source depth.</p>
+<p>Each waveform is processed using the following sequence:</p>
+<ul>
+<li><p>Remove the average value measured before the P wave.</p></li>
+<li><p>Remove instrument sensitivity so the three components are comparable.</p></li>
+<li><p>Apply a causal 1-2 Hz band-pass filter.</p></li>
+<li><p>Measure noise from 15 to 5 seconds before the predicted P time.</p></li>
+<li><p>Test one-second windows beginning from P-2 to P+4 seconds in 0.05-second steps.</p></li>
+<li><p>Require a window-to-noise RMS ratio of at least 3, rectilinearity of at least 0.5, and incidence of at least 10 degrees.</p></li>
+<li><p>Among candidates close to the best rectilinearity, choose the earliest window.</p></li>
+</ul>
+<p>The Flinn method finds the principal axis of three-component particle motion. Because an axis has two equivalent ends, the reported azimuth error ranges from 0 to 90 degrees. The known event direction is used only after window selection to measure the error; it is not used to select the window.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/media/image2.png" style="width:6.2in;height:3.92837in" class="figure-img"></p>
+<figcaption><em>Figure 2. Example filtered Z, N, and E seismogram for event 75351142 at BK.HAYF.00. The shaded interval is the selected one-second window; the dashed red line is the predicted P arrival.</em></figcaption>
+</figure>
+</div>
+<p>In this example the selected window begins before the predicted arrival. Across all accepted observations, the median start offset was -1.05 seconds. This does not necessarily mean that the travel-time prediction is wrong by the same amount: filtering, emerging signal energy, source complexity, and the window-selection rule can all contribute.</p>
+</section>
+<section id="fixed-window-compared-with-moving-window-selection" class="level1">
+<h1>Fixed window compared with moving window selection</h1>
+<p>The fixed-window test uses the interval from P to P+1 second. The moving-window test searches from P-2 to P+4 seconds and selects the earliest candidate near the maximum rectilinearity that passes the quality tests. The moving method improved both waveform acceptance and directional accuracy.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 28%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Method</strong></th>
+<th style="text-align: center;"><strong>Good</strong></th>
+<th style="text-align: center;"><strong>Good and error below 10 degrees</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fixed P window</td>
+<td style="text-align: center;">48.6%</td>
+<td style="text-align: center;">13.1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Selected moving window</td>
+<td style="text-align: center;">89.9%</td>
+<td style="text-align: center;">38.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Change</td>
+<td style="text-align: center;">+41.3 percentage points</td>
+<td style="text-align: center;">+25.3 percentage points</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/media/image3.png" style="width:6.45in;height:4.00063in" class="figure-img"></p>
+<figcaption><em>Figure 3. Percentage of analyzed observations passing the quality tests and the stricter quality-plus-azimuth criterion for the fixed and selected moving windows.</em></figcaption>
+</figure>
+</div>
+<p>Of 825 analyzed observations, 742 passed the moving-window quality criteria and 317 were also within 10 degrees of the catalog direction. A waveform can therefore look sufficiently strong and linear without producing an accurate back azimuth. Quality acceptance and directional correctness are related but distinct tests.</p>
+</section>
+<section id="station-level-results" class="level1">
+<h1>Station level results</h1>
+<p>Performance differed sharply among stations. The table below reproduces the current notebook's complete 20-station summary in a compact form. Mean error refers to Good observations only, while the below-10-degree column counts Good observations meeting the strict directional threshold.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 20%">
+<col style="width: 17%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Station</strong></th>
+<th style="text-align: center;"><strong>Group</strong></th>
+<th style="text-align: center;"><strong>Analyzed</strong></th>
+<th style="text-align: center;"><strong>Good</strong></th>
+<th style="text-align: center;"><strong>Good and &lt;10 deg</strong></th>
+<th style="text-align: center;"><strong>Mean error deg</strong></th>
+<th style="text-align: center;"><strong>Median shift s</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BK.MILL</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">56</td>
+<td style="text-align: center;">53</td>
+<td style="text-align: center;">44</td>
+<td style="text-align: center;">7.02</td>
+<td style="text-align: center;">-2.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.PETY</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">56</td>
+<td style="text-align: center;">52</td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">6.54</td>
+<td style="text-align: center;">-1.75</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BK.BJES</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">12.98</td>
+<td style="text-align: center;">-0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.DLIK</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">6.99</td>
+<td style="text-align: center;">-1.55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BK.GUMB</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">4.16</td>
+<td style="text-align: center;">-1.65</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.BLCR</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">5.16</td>
+<td style="text-align: center;">-2.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BK.SUGR</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">34</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">7.09</td>
+<td style="text-align: center;">-1.52</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.HAYF</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">47</td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">17.63</td>
+<td style="text-align: center;">-1.60</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BK.KNEE</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">46</td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">14.67</td>
+<td style="text-align: center;">-0.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.HALS</td>
+<td style="text-align: center;">Best</td>
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">11.14</td>
+<td style="text-align: center;">-1.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BK.SANG</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">48</td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">34.89</td>
+<td style="text-align: center;">+0.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.BONV</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">34</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">28.22</td>
+<td style="text-align: center;">-1.20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BK.SPAN</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">42.73</td>
+<td style="text-align: center;">+0.93</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.ORRS</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">36.02</td>
+<td style="text-align: center;">-0.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BK.YBH</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">47</td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">23.65</td>
+<td style="text-align: center;">-1.30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.RBOW</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">66</td>
+<td style="text-align: center;">55</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">61.17</td>
+<td style="text-align: center;">+0.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BK.HULL</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">24.81</td>
+<td style="text-align: center;">-1.27</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.RVIT</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">38.56</td>
+<td style="text-align: center;">-1.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BK.WLKR</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">47.74</td>
+<td style="text-align: center;">+0.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BK.DCMP</td>
+<td style="text-align: center;">Poor</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">45.05</td>
+<td style="text-align: center;">-1.65</td>
+</tr>
+</tbody>
+</table>
+<p>BK.MILL and BK.PETY produced the largest numbers of strict successes, with 44 and 41 Good observations below 10 degrees. BK.GUMB had the smallest mean absolute error among Good observations, 4.16 degrees. At the other extreme, BK.WLKR and BK.DCMP had no strict successes in this run despite 37 and 26 analyzed observations. These contrasts show why a single network-wide percentage cannot describe station performance.</p>
+</section>
+<section id="residual-distributions-at-the-strongest-stations" class="level1">
+<h1>Residual distributions at the strongest stations</h1>
+<p>The diagnostic histograms below show the ten well-sampled stations with the lowest mean absolute error among Good observations. A narrow concentration near zero indicates that the measured particle-motion axis frequently points toward the earthquake. A broad tail indicates less reliable directional performance under the same processing settings.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/media/image4.png" style="width:5.25in;height:6.77174in" class="figure-img"></p>
+<figcaption><em>Figure 4. Absolute axial azimuth-residual distributions for ten stations with the lowest mean error. Blue bars are Good observations, gray bars are Bad observations, and the dashed line marks 10 degrees.</em></figcaption>
+</figure>
+</div>
+<p>The histograms also show that good average performance does not eliminate outliers. Several otherwise strong stations retain isolated residuals far above 10 degrees. A practical locator should therefore combine polarization with arrival times or agreement among neighboring stations rather than trusting one measurement by itself.</p>
+</section>
+<section id="interpretation" class="level1">
+<h1>Interpretation</h1>
+<p>The moving-window result supports a simple operational conclusion: the most informative P-wave interval is often not exactly the fixed interval beginning at the predicted arrival. A short search near P can recover a clearer linear segment, especially when the theoretical arrival is approximate or the first visible energy is emergent. The station dependence is equally important. Local geology, scattering, channel orientation, site conditions, event depth, source radiation, and errors in the predicted P time can rotate or weaken the measured particle motion. Passing signal-to-noise, rectilinearity, and incidence tests does not guarantee a correct direction.</p>
+</section>
+<section id="limitations" class="level1">
+<h1>Limitations</h1>
+<ul>
+<li><p>The travel-time table assumes an 8 km source depth even though catalog depths vary.</p></li>
+<li><p>Only one frequency band, 1-2 Hz, and one-second polarization windows were tested.</p></li>
+<li><p>The study uses a fixed, deliberately contrasted 20-station subset and may not represent the full BK network or other networks.</p></li>
+<li><p>Offshore geometry places most stations on one side of an earthquake.</p></li>
+<li><p>Catalog locations are treated as the reference direction but also contain uncertainty.</p></li>
+<li><p>Current catalog and station availability can change, so a future notebook run may give slightly different percentages.</p></li>
+</ul>
+</section>
+<section id="next-tests" class="level1">
+<h1>Next tests</h1>
+<ul>
+<li><p>Use source-depth-dependent travel times instead of a single 8 km assumption.</p></li>
+<li><p>Compare several frequency bands and window lengths.</p></li>
+<li><p>Require agreement among nearby stations before accepting a directional constraint.</p></li>
+<li><p>Combine polarization estimates with P-arrival times in an initial offshore location method.</p></li>
+<li><p>Evaluate the rules on a separate set of earthquakes not used to select thresholds or station groups.</p></li>
+</ul>
+</section>
+<section id="data-software-and-reproducibility" class="level1">
+<h1>Data software and reproducibility</h1>
+<p>Event and station metadata came from NCEDC. Waveforms were requested from EarthScope first and NCEDC second. Coastlines came from Natural Earth. Polarization was calculated with ObsPy's Flinn implementation. The executed notebook retains the figures, tables, station-level results, event-level results, code, and stated limitations.</p>
+<p><strong>Project notebook:</strong> <a href="https://nbviewer.org/urls/www.iris.edu/hq/files/short_courses/2020/ssb/akimov_offshore_california_p_wave_polarization.ipynb"><u>View the complete executable notebook</u></a></p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/</guid>
+  <pubDate>Thu, 17 Sep 2026 21:52:38 GMT</pubDate>
+</item>
 </channel>
 </rss>

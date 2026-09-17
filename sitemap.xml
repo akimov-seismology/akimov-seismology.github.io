@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://akimov-seismology.github.io/posts/welcome/index.html</loc>
+    <loc>https://akimov-seismology.github.io/posts/offshore-california-p-wave-polarization/index.html</loc>
+    <lastmod>2026-09-17T21:45:31.853Z</lastmod>
+  </url>
+  <url>
+    <loc>https://akimov-seismology.github.io/index.html</loc>
     <lastmod>2026-09-17T20:04:50.145Z</lastmod>
   </url>
   <url>
@@ -9,7 +13,7 @@
     <lastmod>2026-09-17T20:04:50.145Z</lastmod>
   </url>
   <url>
-    <loc>https://akimov-seismology.github.io/index.html</loc>
+    <loc>https://akimov-seismology.github.io/posts/welcome/index.html</loc>
     <lastmod>2026-09-17T20:04:50.145Z</lastmod>
   </url>
 </urlset>
