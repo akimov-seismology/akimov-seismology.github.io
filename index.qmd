@@ -15,3 +15,9 @@ This website contains research notes, computational experiments,
 figures, and notebooks related to earthquake location, seismic
 phase association, waveform analysis, polarization, virtual arrays,
 and Earth structure.
+
+## Research articles
+
+### [Offshore California P-Wave Polarization](posts/offshore-california-p-wave-polarization/)
+
+A station-level study of P-wave polarization and back-azimuth accuracy for offshore California earthquakes.
