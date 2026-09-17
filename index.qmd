@@ -1,0 +1,17 @@
+---
+title: "Research Notes"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  feed: true
+page-layout: full
+---
+
+I am an independent researcher working in earthquake seismology.
+
+This website contains research notes, computational experiments,
+figures, and notebooks related to earthquake location, seismic
+phase association, waveform analysis, polarization, virtual arrays,
+and Earth structure.

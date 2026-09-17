@@ -1,0 +1,15 @@
+---
+title: "Welcome to My Research Notes"
+author: "Andrei Akimov"
+date: "2026-09-17"
+categories:
+  - Seismology
+  - Research Notes
+description: "Introduction to my independent research website."
+---
+
+I created this website to organize and share my independent work in
+earthquake seismology.
+
+Future articles will present research notes, preliminary results,
+figures, technical explanations, and links to reproducible notebooks.

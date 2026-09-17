@@ -1,0 +1,20 @@
+title: "About"
+---
+
+## Andrei Akimov
+
+I am an independent researcher in earthquake seismology with more
+than 25 years of experience in seismic data processing, real-time
+earthquake systems, and scientific software development.
+
+I hold a Master's degree in Applied Mathematics. My current interests
+include earthquake location, phase association, P-wave polarization,
+waveform analysis, virtual arrays, and observations of Earth's inner
+core.
+
+I am open to short- and long-term projects and research collaborations.
+
+## GitHub
+
+- [Current research website](https://github.com/akimov-seismology)
+- [Earlier notebooks and code](https://github.com/CatShadow2020)
